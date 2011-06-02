@@ -49,23 +49,25 @@ function brainfuck(input) {
         state.cells[state.pointer] = options.inputfunc();
         break;
       case '[':
-        // At beginning of loop, find its corresponding end of loop
-        var nestedloops = 0;
-        for (var j = inputptr + 1; j < input.length; j++) {
-          // Internal loop detected, ++ nestedloops
-          if (input.charAt(j) == '[') {
-            nestedloops++;
-          }
-          // End of loop detected
-          else if (input.charAt(j) == ']') {
-            // If nestedloops > 0, -- nestedloops
-            if (nestedloops) {
-              nestedloops--;
-            // If nestedloops == 0, we know that this is the end of the current loop
-            } else {
-              state.matchingbrackets[inputptr] = j;
-              state.matchingbrackets[j] = inputptr;
-              break;
+        // If no corresponding ] found, find it and save it
+        if (!state.matchingbrackets[inputptr]) {
+          var nestedloops = 0;
+          for (var j = inputptr + 1; j < input.length; j++) {
+            // Internal loop detected, ++ nestedloops
+            if (input.charAt(j) == '[') {
+              nestedloops++;
+            }
+            // End of loop detected
+            else if (input.charAt(j) == ']') {
+              // If nestedloops > 0, -- nestedloops
+              if (nestedloops) {
+                nestedloops--;
+              // If nestedloops == 0, we know that this is the end of the current loop
+              } else {
+                state.matchingbrackets[inputptr] = j;
+                state.matchingbrackets[j] = inputptr;
+                break;
+              }
             }
           }
         }
