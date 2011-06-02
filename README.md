@@ -11,4 +11,6 @@ If you don't know what Brainfuck is, read
 
 ### TODO
 
-* Does currently not support loops within loops
+* There are probably things that do not work yet, but more testing is
+  required.
+* ~~Does currently not support loops within loops~~
