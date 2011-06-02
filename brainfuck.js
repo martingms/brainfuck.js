@@ -8,15 +8,16 @@
 function brainfuck(input) {
   var options = {
     // Output: char is an ascii code integer, get the the ascii character with String.fromCharCode(char)
-    outputfunc : function(char) { console.log(String.fromCharCode(char)); },
+    outputfunc : function(char) { document.getElementById('output').value += String.fromCharCode(char); },
     // Input: Can be anything, as long as it returns an inputted character as an ascii code
-    inputfunc  : function() { return prompt('input a single char/digit').charCodeAt(0); }
+    inputfunc  : function() { return document.getElementById('input').value.charCodeAt(state.inpchar++); }
   };
   var state = {
     // Data pointer pointing at current cell
     pointer :  0,
     // Array of data cells, initially empty - filled as needed
-    cells   :  []
+    cells   :  [],
+    inpchar :  0
   };
 
   // Loops through the brainfuck input string
