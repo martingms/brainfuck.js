@@ -4,12 +4,19 @@
   <head>
     <title> brainfuck.js </title>
     <script src=/brainfuck.js></script>
-    <script>
-      //source = prompt('Input brainfuck source');
-      //brainfuck(source);
-    </script>
   </head>
   <body>
+    <h2> brainfuck.js - a Brainfuck interpreter written in JavaScript</h2>
+    <h3> Brainfuck code: </h3>
+    <textarea id='source' cols='72' rows='7'></textarea>
+    <br>
+    <button type='button' onClick='document.getElementById("output").value = "";
+                                   brainfuck(document.getElementById("source").value)'>Run!</button>
+    <h3> Input: </h3>
+    <textarea id='input' cols='72' rows='7'></textarea>
+    <br>
+    <h3> Output: </h3>
+    <textarea id='output' cols='72' rows='7'></textarea>
   </body>
 </html>
 
