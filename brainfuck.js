@@ -13,11 +13,10 @@ function brainfuck(input) {
     inputfunc  : function() { return document.getElementById('input').value.charCodeAt(state.inpchar++); }
   };
   var state = {
-    // Data pointer pointing at current cell
-    pointer :  0,
-    // Array of data cells, initially empty - filled as needed
-    cells   :  [],
-    inpchar :  0
+    pointer :  0,         // Data pointer pointing at current cell
+    cells   :  [],        // Array of data cells, initially empty - filled as needed
+    inpchar :  0,         // Points to first input character not yet taken as input
+    matchingbrackets : [] // Keeping track of loop begin/end
   };
 
   // Loops through the brainfuck input string
@@ -50,25 +49,31 @@ function brainfuck(input) {
         state.cells[state.pointer] = options.inputfunc();
         break;
       case '[':
-        // If current cell is 0, jump to first command after loop
-        if (!state.cells[state.pointer]) {
-          for (var j = inputptr; j < input.length; j++) {
-            if (input.charAt(j) == ']') {
-              inputptr = j+1;
+        // At beginning of loop, find its corresponding end of loop
+        var nestedloops = 0;
+        for (var j = inputptr + 1; j < input.length; j++) {
+          if (input.charAt(j) == '[') {
+            nestedloops++;
+          }
+          else if (input.charAt(j) == ']') {
+            if (nestedloops) {
+              nestedloops--;
+            } else {
+              state.matchingbrackets[inputptr] = j;
+              state.matchingbrackets[j] = inputptr;
               break;
             }
           }
+        }
+        // If current cell is 0, jump to first command after loop
+        if (!state.cells[state.pointer]) {
+          inputptr = state.matchingbrackets[inputptr] + 1;
         }
         break;
       case ']':
         // If current cell is not zero, jump to beginning of loop
         if (state.cells[state.pointer]) {
-          for (var j = inputptr; j >= 0; j--) {
-            if (input.charAt(j) == '[') {
-              inputptr = j;
-              break;
-            }
-          }
+          inputptr = state.matchingbrackets[inputptr];
         }
         break;
     }
