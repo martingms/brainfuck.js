@@ -1,8 +1,14 @@
 /*
- *   brainfuck.js
- *    
- *   A JavaScript Brainfuck interpreter by Martin Gammelsæter
- *   If you don't know what Brainfuck is: http://en.wikipedia.org/wiki/Brainfuck
+ *                             _                                      _
+ *        _                   /_/                                    /_/
+ *       / /    _     __      _  __    _  ___  _ _  __   _ _         _  __ 
+ *      / /_   / /_  /  \    / //  \  / // __// / // _/ / /_/       / // _\
+ *     /  _ \ / _ _// /\ \  / // /\ \/ // _/ / / // /_ /  /_  _  __/ /_\ \
+ *    /_/___//_/    \__/\_\/_//_/  \__//_/   \__/ \__//_/\_/ /_/ \__/ \__/
+ *         brainfuck.js
+ *
+ *   A Brainfuck interpreter written in JavaScript by Martin Gammelsæter
+ *   If you don't know what Brainfuck is, visit http://en.wikipedia.org/wiki/Brainfuck
  */
 
 function brainfuck(input) {
